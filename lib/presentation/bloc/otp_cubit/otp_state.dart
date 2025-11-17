@@ -6,6 +6,6 @@ class OtpState {
   OtpState({required this.otpCode});
 
   OtpState copyWith({String? otpCode}) {
-    return OtpState(otpCode: this.otpCode);
+    return OtpState(otpCode: otpCode ?? this.otpCode);
   }
 }
