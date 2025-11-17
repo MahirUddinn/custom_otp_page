@@ -8,8 +8,8 @@ class OtpCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.onOtpCompleted,
-    required this.resendTimerSecond,
-    required this.onOtpResend,
+    this.resendTimerSecond = 0,
+    this.onOtpResend = _defaultResend,
     required this.onVerify,
     required this.otpLength,
   });
@@ -21,6 +21,8 @@ class OtpCard extends StatelessWidget {
   final void Function() onVerify;
   final int otpLength;
 
+  static void _defaultResend() {}
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,13 +33,16 @@ class OtpCard extends StatelessWidget {
           SizedBox(height: 20),
           OtpField(onCompleted: onOtpCompleted, otpLength: otpLength),
           SizedBox(height: 20),
+
           resendTimerSecond != 0
               ? OtpResend(
                   initialSeconds: resendTimerSecond,
                   onResend: onOtpResend,
                 )
               : Container(),
+
           resendTimerSecond != 0 ? SizedBox(height: 20) : Container(),
+
           OtpVerify(onVerify: onVerify),
         ],
       ),

@@ -19,9 +19,7 @@ class _OtpScreenState extends State<OtpScreen> {
           onOtpCompleted: (str) {
             print(str);
           },
-          onOtpResend: () {},
           onVerify: () {},
-          resendTimerSecond: 10,
           otpLength: 5,
         ),
       ),
