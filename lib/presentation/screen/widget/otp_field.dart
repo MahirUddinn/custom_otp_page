@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class OtpField extends StatefulWidget {
-  const OtpField({super.key, required this.onCompleted});
+  const OtpField({super.key, required this.onCompleted, required this.otpLength});
 
   final void Function(String otp) onCompleted;
+  final int otpLength;
 
   @override
   State<OtpField> createState() => _OtpFieldState();
 }
 
 class _OtpFieldState extends State<OtpField> {
-  final int length = 5;
+  late final int length = widget.otpLength;
   late List<TextEditingController> controllers;
   late List<FocusNode> nodes;
 
@@ -41,6 +42,7 @@ class _OtpFieldState extends State<OtpField> {
       }),
     );
   }
+
   Widget fieldInstance(int index) {
     return Container(
       height: 50,
@@ -60,7 +62,10 @@ class _OtpFieldState extends State<OtpField> {
         maxLength: 1,
         keyboardType: TextInputType.number,
         style: const TextStyle(color: Colors.white),
-        decoration: const InputDecoration(counterText: "", border: InputBorder.none),
+        decoration: const InputDecoration(
+          counterText: "",
+          border: InputBorder.none,
+        ),
         textInputAction: TextInputAction.none,
 
         onChanged: (value) {

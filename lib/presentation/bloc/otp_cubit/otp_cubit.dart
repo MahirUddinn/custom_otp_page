@@ -7,6 +7,5 @@ class OtpCubit extends Cubit<OtpState> {
 
   void updateOtp(String otp) {
     emit(state.copyWith(otpCode: otp));
-    print(state.otpCode);
   }
 }

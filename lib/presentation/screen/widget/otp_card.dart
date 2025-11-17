@@ -1,19 +1,25 @@
-import 'package:custom_otp/presentation/bloc/otp_cubit/otp_cubit.dart';
 import 'package:custom_otp/presentation/screen/widget/otp_field.dart';
 import 'package:custom_otp/presentation/screen/widget/otp_resend.dart';
 import 'package:custom_otp/presentation/screen/widget/otp_verify.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 class OtpCard extends StatelessWidget {
-  const OtpCard({super.key, required this.title, required this.onOtpCompleted, required this.resendTimerSecond, required this.onOtpResend, required this.onVerify, });
+  const OtpCard({
+    super.key,
+    required this.title,
+    required this.onOtpCompleted,
+    required this.resendTimerSecond,
+    required this.onOtpResend,
+    required this.onVerify,
+    required this.otpLength,
+  });
 
   final Widget title;
   final void Function(String) onOtpCompleted;
   final int resendTimerSecond;
   final void Function() onOtpResend;
   final void Function() onVerify;
+  final int otpLength;
 
   @override
   Widget build(BuildContext context) {
@@ -21,22 +27,20 @@ class OtpCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          Center(
-            child: title
-          ),
+          Center(child: title),
           SizedBox(height: 20),
-          OtpField(onCompleted: onOtpCompleted),
+          OtpField(onCompleted: onOtpCompleted, otpLength: otpLength),
           SizedBox(height: 20),
-          resendTimerSecond != 0?
-          OtpResend(initialSeconds: resendTimerSecond, onResend: onOtpResend): SizedBox(),
-          SizedBox(height: 20),
-          OtpVerify(
-            onVerify: onVerify,
-          ),
+          resendTimerSecond != 0
+              ? OtpResend(
+                  initialSeconds: resendTimerSecond,
+                  onResend: onOtpResend,
+                )
+              : Container(),
+          resendTimerSecond != 0 ? SizedBox(height: 20) : Container(),
+          OtpVerify(onVerify: onVerify),
         ],
       ),
     );
   }
 }
-
-
